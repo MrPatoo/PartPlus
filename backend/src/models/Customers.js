@@ -30,7 +30,7 @@ const customersSchema = new Schema({
         type: String,
         require: true,
         unique: true,
-        match: [/^[0-9]{8}$/, "el numero de teléfono tiene que ser válido"] //validar número de teléfono
+        match: [/^[0-9]{8}$/, "el numero de teléfono tiene que ser válido"] //validar número de teléfono, ejemplo: 12345678
     },
 
     age:{
