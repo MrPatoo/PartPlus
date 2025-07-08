@@ -50,7 +50,10 @@ reservesController.postReserves = async(req, res)=>{
 //DELETE
 reservesController.deleteReserve = async(req,res) =>{
     try {
-        await reservesModel.findByIdAndDelete(req.params.id)
+        const deleteReserves = await reservesModel.findByIdAndDelete(req.params.id)
+        if(!deleteReserves){
+            return res.status(400).json({message: "cannot delete reserves"})
+        }
 
         res.json({message:"reserve deleted"})
     
@@ -64,8 +67,10 @@ reservesController.deleteReserve = async(req,res) =>{
 reservesController.putReserves = async(req, res) =>{
     try {
         const{idCustomer, vehicle, service, status} = req.body;
-        await reservesModel.findByIdAndUpdate(req.params.id, {idCustomer, vehicle, service, status}, {new:true})
-        
+        const updateReserves = await reservesModel.findByIdAndUpdate(req.params.id, {idCustomer, vehicle, service, status}, {new:true})
+        if(!updateReserves){
+            return res.status(400).json({message: "cannot update reserves"})
+        }
         res.json({message:"reserve updated"})
     } catch (error) {
         res.status(500).json({message: "internal server error"})

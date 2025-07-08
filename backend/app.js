@@ -5,6 +5,13 @@ import reservesRoutes from "./src/routes/reservesRoutes.js"
 
 const app = express();
 
+app.use(
+    cors({
+        origin: "*", //lo pueden manipular
+        credentials: true,
+    })
+)
+
 app.use(express.json());
 
 app.use("/api/customers", customersRoutes); 
